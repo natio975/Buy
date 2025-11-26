@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunEnglish - Учи английский играючи!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+        }
+        
+        :root {
+            --primary: #FF4081;
+            --secondary: #00E5FF;
+            --accent: #FFEB3B;
+            --dark: #9C27B0;
+            --light: #E1F5FE;
+            --success: #76FF03;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #FFEBEE, #E0F7FA);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo i {
+            color: var(--accent);
+            font-size: 2.2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Главный баннер */
+        .hero {
+            background: url('https://i.postimg.cc/Wbn65fhy/image.png') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,64,129,0.7), rgba(0,229,255,0.7));
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent);
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Секция О нас */
+        .about-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--light), #E0F7FA);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .about-text h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-text {
+            color: var(--dark);
+            font-weight: bold;
+        }
+        
+        .about-image {
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .image-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--accent);
+            border-radius: 20px;
+            z-index: -1;
+        }
+        
+        .decoration-1 {
+            top: -20px;
+            left: -20px;
+            transform: rotate(-15deg);
+        }
+        
+        .decoration-2 {
+            bottom: -20px;
+            right: -20px;
+            transform: rotate(15deg);
+        }
+        
+        /* Секция с товарами */
+        .products-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category-tab {
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .category-tab:hover:not(.active) {
+            background-color: var(--accent);
+        }
+        
+        /* Сетка карточек товаров */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Карточка товара */
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .product-age {
+            background-color: var(--light);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--dark);
+        }
+        
+        .product-rating {
+            color: #FFC107;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            animation: modalAppear 0.5s;
+        }
+        
+        @keyframes modalAppear {
+            from {transform: scale(0.8); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: #7f8c8d;
+            cursor: pointer;
+            z-index: 10;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .close-btn:hover {
+            color: var(--primary);
+        }
+        
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Карусель изображений */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255,255,255,0.7);
+            color: var(--dark);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .carousel-control:hover {
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-control.prev {
+            left: 15px;
+        }
+        
+        .carousel-control.next {
+            right: 15px;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .carousel-indicator.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        
+        .modal-product-info {
+            padding: 1.5rem;
+        }
+        
+        .modal-product-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .modal-product-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .modal-product-age, .modal-product-category {
+            background-color: var(--light);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        .modal-product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .modal-product-features {
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-product-features h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .modal-product-features ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .modal-product-features li {
+            margin-bottom: 0.3rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .modal-product-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .modal-product-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .add-to-cart-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .add-to-cart-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Корзина */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1001;
+            overflow-y: auto;
+        }
+        
+        .cart-header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            padding: 1rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            gap: 1rem;
+        }
+        
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 2px solid #eee;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: white;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .checkout-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        /* Секция преимуществ */
+        .features-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--light), #E0F7FA);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-description {
+            color: #666;
+        }
+        
+        /* Подвал сайта */
+        footer {
+            background: linear-gradient(90deg, var(--dark), #7B1FA2);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            display: block;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 1.5rem;
+            color: #bdc3c7;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            
+            .carousel {
+                height: 250px;
+            }
+            
+            .modal-body {
+                flex-direction: column;
+            }
+            
+            .cart-modal {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>FunEnglish</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#products">Товары</a></li>
+                    <li><a href="#features">Почему мы</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                    <li class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Учи английский играючи!</h1>
+            <p>Интерактивные книги и игры для детей, которые делают изучение английского веселым и эффективным</p>
+            <a href="#products" class="cta-button">Смотреть товары</a>
+        </div>
+    </section>
+
+    <!-- Секция О нас -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О нас</h2>
+                    <p>FunEnglish - это команда энтузиастов, которые верят, что изучение английского языка должно быть увлекательным приключением для детей. Мы создаем уникальные образовательные продукты, которые превращают процесс обучения в веселую игру.</p>
+                    <p>Наша миссия - помочь детям полюбить английский язык с самого раннего возраста. Мы сотрудничаем с опытными педагогами, психологами и дизайнерами, чтобы создавать продукты, которые не только обучают, но и развивают творческое мышление.</p>
+                    <p>Каждый наш продукт - это результат тщательной работы и тестирования с реальными детьми. Мы гордимся тем, что наши материалы используются тысячами семей и образовательных центров по всей стране.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-text">Лет опыта</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10,000+</div>
+                            <div class="stat-text">Довольных детей</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-text">Образовательных продуктов</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-decoration decoration-1"></div>
+                    <div class="image-decoration decoration-2"></div>
+                    <img src="https://i.postimg.cc/Wbn65fhy/image.png" alt="Дети изучают английский">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с товарами -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <h2 class="section-title">Наши обучающие продукты</h2>
+            
+            <!-- Вкладки категорий -->
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">Все товары</button>
+                <button class="category-tab" data-category="books">Интерактивные книги</button>
+                <button class="category-tab" data-category="games">Обучающие игры</button>
+                <button class="category-tab" data-category="sets">Наборы для обучения</button>
+            </div>
+            
+            <!-- Сетка карточек товаров -->
+            <div class="products-grid">
+                <!-- Карточка товара 1 -->
+                <div class="product-card" data-category="books">
+                    <div class="product-badge">Хит продаж</div>
+                    <img src="https://i.postimg.cc/9XGgdbV7/1764185348.png" alt="Алфавитное приключение" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Алфавитное приключение</h3>
+                        <p class="product-description">Интерактивная книга со звуками и анимацией для изучения английского алфавита</p>
+                        <div class="product-meta">
+                            <span class="product-age">Возраст 3-6</span>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <div class="product-price">2490 руб.</div>
+                        <button class="buy-btn" data-product="1">Подробнее</button>
+                    </div>
+                </div>
+                
+                <!-- Карточка товара 2 -->
+                <div class="product-card" data-category="games">
+                    <img src="https://i.postimg.cc/fymbLF03/1764185829.png" alt="Игра в слова" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Игра в слова</h3>
+                        <p class="product-description">Веселая игра на сопоставление для расширения словарного запаса и улучшения памяти</p>
+                        <div class="product-meta">
+                            <span class="product-age">Возраст 4-8</span>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-price">1990 руб.</div>
+                        <button class="buy-btn" data-product="2">Подробнее</button>
+                    </div>
+                </div>
+                
+                <!-- Карточка товара 3 -->
+                <div class="product-card" data-category="sets">
+                    <div class="product-badge">Новинка</div>
+                    <img src="https://i.postimg.cc/pTkZSGdK/1764186204.png" alt="Стартовый набор" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Стартовый набор</h3>
+                        <p class="product-description">Полный набор с книгами, играми и карточками для начинающих</p>
+                        <div class="product-meta">
+                            <span class="product-age">Возраст 5-10</span>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-price">4990 руб.</div>
+                        <button class="buy-btn" data-product="3">Подробнее</button>
+                    </div>
+                </div>
+                
+                <!-- Карточка товара 4 -->
+                <div class="product-card" data-category="books">
+                    <img src="https://i.postimg.cc/prb8V3L3/1764186524.png" alt="Фонетика весело" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Фонетика весело</h3>
+                        <p class="product-description">Изучайте английскую фонетику с интерактивными звуками и заданиями</p>
+                        <div class="product-meta">
+                            <span class="product-age">Возраст 4-7</span>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <div class="product-price">2290 руб.</div>
+                        <button class="buy-btn" data-product="4">Подробнее</button>
+                    </div>
+                </div>
+                
+                <!-- Карточка товара 5 -->
+                <div class="product-card" data-category="games">
+                    <img src="https://i.postimg.cc/C1NYdqF3/1764186820.png" alt="Строитель предложений" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Строитель предложений</h3>
+                        <p class="product-description">Создавайте предложения с красочными карточками слов и иллюстрациями</p>
+                        <div class="product-meta">
+                            <span class="product-age">Возраст 6-12</span>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-price">2990 руб.</div>
+                        <button class="buy-btn" data-product="5">Подробнее</button>
+                    </div>
+                </div>
+                
+                <!-- Карточка товара 6 -->
+                <div class="product-card" data-category="sets">
+                    <img src="https://i.postimg.cc/Wbn65fhy/image.png" alt="Продвинутый английский" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Продвинутый английский</h3>
+                        <p class="product-description">Для учеников, готовых улучшить свои навыки английского с интересными заданиями</p>
+                        <div class="product-meta">
+                            <span class="product-age">Возраст 8-14</span>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <div class="product-price">5990 руб.</div>
+                        <button class="buy-btn" data-product="6">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция преимуществ -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают FunEnglish?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="feature-title">Обучение через игру</h3>
+                    <p class="feature-description">Наши продукты превращают изучение английского в увлекательное приключение с играми и интерактивными заданиями.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">Образовательная ценность</h3>
+                    <p class="feature-description">Все продукты разработаны совместно с педагогами для обеспечения эффективных результатов обучения.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3 class="feature-title">Дружелюбный дизайн</h3>
+                    <p class="feature-description">Яркие цвета, привлекательные персонажи и интуитивные интерфейсы, разработанные специально для детей.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="feature-title">Проверенные результаты</h3>
+                    <p class="feature-description">Тысячи детей улучшили свои навыки английского с помощью наших продуктов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно для товара -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <!-- Карусель изображений -->
+                <div class="carousel">
+                    <div class="carousel-inner">
+                        <!-- Изображения будут добавляться динамически -->
+                    </div>
+                    <button class="carousel-control prev">&#10094;</button>
+                    <button class="carousel-control next">&#10095;</button>
+                    <div class="carousel-indicators">
+                        <!-- Индикаторы будут добавляться динамически -->
+                    </div>
+                </div>
+                
+                <!-- Информация о товаре -->
+                <div class="modal-product-info">
+                    <h2 class="modal-product-title">Название товара</h2>
+                    <div class="modal-product-meta">
+                        <span class="modal-product-age">Возраст 0-0</span>
+                        <span class="modal-product-category">Категория</span>
+                    </div>
+                    <p class="modal-product-description">Описание товара появится здесь с полной информацией о функциях и характеристиках продукта.</p>
+                    
+                    <div class="modal-product-features">
+                        <h4>Ключевые особенности:</h4>
+                        <ul>
+                            <li>Интерактивные обучающие задания</li>
+                            <li>Яркие иллюстрации и анимация</li>
+                            <li>Разработано с педагогами</li>
+                            <li>Дружелюбный интерфейс для детей</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-product-price">0 руб.</div>
+                    <button class="add-to-cart-btn">Добавить в корзину</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Корзина -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-header">
+            <h3 class="cart-title">Корзина</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Товары будут добавляться динамически -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                <p>Ваша корзина пуста</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 руб.</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Подвал сайта -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FunEnglish</h3>
+                    <p>Делаем изучение английского веселым и эффективным для детей с помощью интерактивных книг и игр.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://vk.com" target="_blank"><i class="fab fa-vk"></i></a>
+                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Навигация</h3>
+                    <a href="#home">Главная</a>
+                    <a href="#about">О нас</a>
+                    <a href="#products">Товары</a>
+                    <a href="#features">Почему мы</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-envelope"></i> info@funenglish.ru</p>
+                    <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    <p><i class="fas fa-map-marker-alt"></i> ул. Образовательная, 123, Москва</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Рассылка</h3>
+                    <p>Подпишитесь, чтобы получать обновления о новых продуктах и советы по обучению.</p>
+                    <form>
+                        <input type="email" placeholder="Ваш Email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 5px; border: none;">
+                        <button type="submit" style="padding: 10px 20px; background: var(--accent); color: var(--dark); border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Подписаться</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FunEnglish. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные о товарах
+        const products = {
+            1: {
+                title: "Алфавитное приключение",
+                description: "Интерактивная книга со звуками и анимацией для изучения английского алфавита. Каждая буква оживает с веселыми персонажами и увлекательными заданиями, которые помогают детям запомнить формы букв и звуки.",
+                age: "Возраст 3-6",
+                category: "Интерактивная книга",
+                price: "2490 руб.",
+                images: [
+                    "https://i.imgur.com/3QmY8xJ.jpeg",
+                    "https://i.imgur.com/2cN7k9J.jpeg",
+                    "https://i.imgur.com/8mR9Y2v.jpeg"
+                ]
+            },
+            2: {
+                title: "Игра в слова",
+                description: "Веселая игра на сопоставление для расширения словарного запаса и улучшения памяти. Дети сопоставляют слова с соответствующими картинками, помогая им ассоциировать английские слова с реальными объектами в увлекательной форме.",
+                age: "Возраст 4-8",
+                category: "Обучающая игра",
+                price: "1990 руб.",
+                images: [
+                    "https://i.imgur.com/5fW8Z9q.jpeg",
+                    "https://i.imgur.com/9zL8pWq.jpeg",
+                    "https://i.imgur.com/7vJ2k8L.jpeg"
+                ]
+            },
+            3: {
+                title: "Стартовый набор",
+                description: "Полный набор с книгами, играми и карточками для начинающих. Этот комплексный пакет включает все необходимое для начала изучения английского языка, с прогрессивными заданиями, которые растут вместе с вашим ребенком.",
+                age: "Возраст 5-10",
+                category: "Набор для обучения",
+                price: "4990 руб.",
+                images: [
+                    "https://i.imgur.com/8mR9Y2v.jpeg",
+                    "https://i.imgur.com/3QmY8xJ.jpeg",
+                    "https://i.imgur.com/5fW8Z9q.jpeg"
+                ]
+            },
+            4: {
+                title: "Фонетика весело",
+                description: "Изучайте английскую фонетику с интерактивными звуками и заданиями. Эта книга фокусируется на связи между буквами и звуками, помогая детям расшифровывать слова и развивать уверенность в чтении через увлекательные фонетические игры.",
+                age: "Возраст 4-7",
+                category: "Интерактивная книга",
+                price: "2290 руб.",
+                images: [
+                    "https://i.imgur.com/2cN7k9J.jpeg",
+                    "https://i.imgur.com/3QmY8xJ.jpeg",
+                    "https://i.imgur.com/8mR9Y2v.jpeg"
+                ]
+            },
+            5: {
+                title: "Строитель предложений",
+                description: "Создавайте предложения с красочными карточками слов и иллюстрациями. Эта игра помогает детям понять структуру предложения и грамматику, весело конструируя смешные и осмысленные предложения с иллюстрированными карточками слов.",
+                age: "Возраст 6-12",
+                category: "Обучающая игра",
+                price: "2990 руб.",
+                images: [
+                    "https://i.imgur.com/9zL8pWq.jpeg",
+                    "https://i.imgur.com/5fW8Z9q.jpeg",
+                    "https://i.imgur.com/7vJ2k8L.jpeg"
+                ]
+            },
+            6: {
+                title: "Продвинутый английский",
+                description: "Для учеников, готовых улучшить свои навыки английского с интересными заданиями. Этот набор включает более сложные материалы для чтения, расширители словарного запаса и грамматические игры, предназначенные для вывода навыков английского на новый уровень.",
+                age: "Возраст 8-14",
+                category: "Набор для обучения",
+                price: "5990 руб.",
+                images: [
+                    "https://i.imgur.com/7vJ2k8L.jpeg",
+                    "https://i.imgur.com/8mR9Y2v.jpeg",
+                    "https://i.imgur.com/9zL8pWq.jpeg"
+                ]
+            }
+        };
+
+        // Переменные для корзины
+        let cart = [];
+        let currentProductId = null;
+
+        // Получаем элементы DOM
+        const modal = document.getElementById('productModal');
+        const cartModal = document.getElementById('cartModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const closeCartBtn = document.querySelector('.close-cart');
+        const cartIcon = document.getElementById('cartIcon');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartCount = document.querySelector('.cart-count');
+        const modalTitle = document.querySelector('.modal-product-title');
+        const modalDescription = document.querySelector('.modal-product-description');
+        const modalAge = document.querySelector('.modal-product-age');
+        const modalCategory = document.querySelector('.modal-product-category');
+        const modalPrice = document.querySelector('.modal-product-price');
+        const addToCartBtn = document.querySelector('.add-to-cart-btn');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselIndicators = document.querySelector('.carousel-indicators');
+        const prevBtn = document.querySelector('.carousel-control.prev');
+        const nextBtn = document.querySelector('.carousel-control.next');
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const productCards = document.querySelectorAll('.product-card');
+
+        // Переменные для управления каруселью
+        let currentSlide = 0;
+        let totalSlides = 0;
+
+        // Функция для открытия модального окна с информацией о товаре
+        function openModal(productId) {
+            const product = products[productId];
+            currentProductId = productId;
+            
+            if (product) {
+                // Заполняем информацию о товаре
+                modalTitle.textContent = product.title;
+                modalDescription.textContent = product.description;
+                modalAge.textContent = product.age;
+                modalCategory.textContent = product.category;
+                modalPrice.textContent = product.price;
+                
+                // Очищаем карусель и индикаторы
+                carouselInner.innerHTML = '';
+                carouselIndicators.innerHTML = '';
+                
+                // Добавляем изображения в карусель
+                product.images.forEach((image, index) => {
+                    const carouselItem = document.createElement('div');
+                    carouselItem.className = 'carousel-item';
+                    if (index === 0) carouselItem.classList.add('active');
+                    
+                    const img = document.createElement('img');
+                    img.src = image;
+                    img.alt = `${product.title} - Image ${index + 1}`;
+                    
+                    carouselItem.appendChild(img);
+                    carouselInner.appendChild(carouselItem);
+                    
+                    // Добавляем индикаторы
+                    const indicator = document.createElement('div');
+                    indicator.className = 'carousel-indicator';
+                    if (index === 0) indicator.classList.add('active');
+                    indicator.addEventListener('click', () => goToSlide(index));
+                    
+                    carouselIndicators.appendChild(indicator);
+                });
+                
+                // Обновляем счетчики слайдов
+                totalSlides = product.images.length;
+                currentSlide = 0;
+                
+                // Показываем модальное окно
+                modal.style.display = 'block';
+                
+                // Настраиваем кнопку добавления в корзину
+                addToCartBtn.onclick = function() {
+                    addToCart(productId);
+                    showNotification(`${product.title} добавлен в корзину!`);
+                };
+            }
+        }
+
+        // Функция для добавления товара в корзину
+        function addToCart(productId) {
+            const product = products[productId];
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    title: product.title,
+                    price: product.price,
+                    image: product.images[0],
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+        }
+
+        // Функция для удаления товара из корзины
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        // Функция для обновления корзины
+        function updateCart() {
+            // Обновляем счетчик корзины
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Обновляем содержимое корзины
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <p>Ваша корзина пуста</p>
+                    </div>
+                `;
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">${item.price} × ${item.quantity}</div>
+                        </div>
+                        <button class="cart-item-remove" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+                
+                // Добавляем обработчики для кнопок удаления
+                document.querySelectorAll('.cart-item-remove').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        removeFromCart(productId);
+                    });
+                });
+            }
+            
+            // Обновляем общую сумму
+            const total = cart.reduce((sum, item) => {
+                const price = parseInt(item.price.replace(/\D/g, ''));
+                return sum + (price * item.quantity);
+            }, 0);
+            cartTotal.textContent = `${total.toLocaleString()} руб.`;
+        }
+
+        // Функция для показа уведомления
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--success);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                z-index: 1002;
+                font-weight: bold;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Функция для перехода к определенному слайду
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Обновляем активные индикаторы
+            document.querySelectorAll('.carousel-indicator').forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        // Функция для перехода к следующему слайду
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        // Функция для перехода к предыдущему слайду
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        // Закрытие модального окна
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Открытие/закрытие корзины
+        function openCart() {
+            cartModal.style.display = 'block';
+        }
+
+        function closeCart() {
+            cartModal.style.display = 'none';
+        }
+
+        // Фильтрация товаров по категориям
+        function filterProducts(category) {
+            productCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Обработчики событий
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product');
+                openModal(productId);
+            });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        cartIcon.addEventListener('click', openCart);
+        closeCartBtn.addEventListener('click', closeCart);
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        checkoutBtn.addEventListener('click', function() {
+            if (cart.length === 0) {
+                showNotification('Корзина пуста!');
+                return;
+            }
+            // Перенаправляем на внешний ресурс для оформления заказа
+            window.open('https://example.com/checkout', '_blank');
+        });
+
+        // Обработчики для вкладок категорий
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Убираем активный класс у всех вкладок
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                // Добавляем активный класс к текущей вкладке
+                this.classList.add('active');
+                // Фильтруем товары
+                const category = this.getAttribute('data-category');
+                filterProducts(category);
+            });
+        });
+
+        // Закрытие модального окна при клике вне его
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+            if (event.target === cartModal) {
+                closeCart();
+            }
+        });
+
+        // Автоматическое перелистывание карусели
+        let carouselInterval;
+        
+        function startCarouselAutoPlay() {
+            carouselInterval = setInterval(nextSlide, 5000);
+        }
+        
+        function stopCarouselAutoPlay() {
+            clearInterval(carouselInterval);
+        }
+        
+        // Запускаем автопрокрутку при открытии модального окна
+        modal.addEventListener('mouseenter', stopCarouselAutoPlay);
+        modal.addEventListener('mouseleave', startCarouselAutoPlay);
+        
+        // Останавливаем автопрокрутку при взаимодействии с каруселью
+        carouselInner.addEventListener('mouseenter', stopCarouselAutoPlay);
+        carouselInner.addEventListener('mouseleave', startCarouselAutoPlay);
+
+        // Инициализация корзины
+        updateCart();
+    </script>
+</body>
+</html>
